@@ -215,6 +215,62 @@ class With1TinyCore extends Config((site, here, up) => {
   }
 })
 
+class With1MicroCore extends Config((site, here, up) => {
+  case XLen => 32
+  case TilesLocated(InSubsystem) => {
+    val micro = RocketTileParams(
+      core = RocketCoreParams(
+        useVM = false,
+        fpu = None,
+        mulDiv = Some(MulDivParams(mulUnroll = 8, mulEarlyOut = true)),
+        // haveCease = false,
+        useDebug = true,
+        useAtomics = false,
+        useCompressed = false,
+        nPMPs = 0,
+        fastLoadByte = true,
+        useRVE = false     
+      ),
+      btb = Some(BTBParams(
+        nEntries = 12,
+        nMatchBits = 7,
+        nPages = 2,
+        nRAS = 4,
+        bhtParams = Some(BHTParams(
+          nEntries = 64,
+          counterLength = 1,
+          historyLength = 4,
+          historyBits = 3)),
+        updatesOutOfOrder = false)
+      ),
+      dcache = Some(DCacheParams(
+        rowBits = site(SystemBusKey).beatBits,
+        nSets = 64, // 16Kb scratchpad
+        nWays = 4,
+        nTLBSets = 1,
+        nTLBWays = 4,
+        nMSHRs = 0,
+        blockBytes = site(CacheBlockBytes),
+        // scratch = Some(0x80000000L)
+      )),
+      icache = Some(ICacheParams(
+        rowBits = site(SystemBusKey).beatBits,
+        nSets = 64,
+        nWays = 2,
+        nTLBSets = 1,
+        nTLBWays = 4,
+        blockBytes = site(CacheBlockBytes)))
+    )
+    List(RocketTileAttachParams(
+      micro,
+      RocketCrossingParams(
+        crossingType = SynchronousCrossing(),
+        master = TileMasterPortParams())
+    ))
+  }
+})
+
+
 class WithNBanks(n: Int) extends Config((site, here, up) => {
   case BankedL2Key => up(BankedL2Key, site).copy(nBanks = n)
 })

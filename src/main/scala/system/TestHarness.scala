@@ -35,4 +35,14 @@ class TestHarness()(implicit p: Parameters) extends Module {
   })
   //ldut.l2_frontend_bus_axi4.foreach(_.tieoff)
   Debug.connectDebug(ldut.debug, ldut.resetctrl, ldut.psd, clock, reset.asBool, io.success)
+
+  ldut.module.macIO.mrx_clk_pad_i := false.B
+  ldut.module.macIO.mdi := false.B
+  ldut.module.macIO.mrxd_pad_i := 0.U
+  ldut.module.macIO.mcoll_pad_i := false.B
+  ldut.module.macIO.mcrs_pad_i := false.B
+  ldut.module.macIO.mrxdv_pad_i := false.B
+  ldut.module.macIO.mtx_clk_pad_i := false.B
+  ldut.module.macIO.mrxerr_pad_i := false.B
+
 }

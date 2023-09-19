@@ -88,9 +88,9 @@ object BootROM {
     subsystem.tileResetVectorNexusNode := bootROMResetVectorSourceNode
     InModuleBody {
       val reset_vector_source = bootROMResetVectorSourceNode.bundle
-      require(reset_vector_source.getWidth >= params.hang.bitLength,
-        s"BootROM defined with a reset vector (${params.hang})too large for physical address space (${reset_vector_source.getWidth})")
-      bootROMResetVectorSourceNode.bundle := params.hang.U
+      require(reset_vector_source.getWidth >= params.address.bitLength,
+        s"BootROM defined with a reset vector (${params.address})too large for physical address space (${reset_vector_source.getWidth})")
+      bootROMResetVectorSourceNode.bundle := params.address.U
     }
     bootrom
   }

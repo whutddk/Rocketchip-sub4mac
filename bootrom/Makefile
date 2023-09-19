@@ -1,9 +1,9 @@
 bootrom_img = bootrom.img
 
-GCC=riscv64-unknown-elf-gcc
+GCC=riscv64-unknown-elf-gcc -march=rv32im -mabi=ilp32
 OBJCOPY=riscv64-unknown-elf-objcopy
 
-all: $(bootrom_img)
+all: $(bootrom_img) bootrom.dump
 
 %.img: %.bin
 	dd if=$< of=$@ bs=128 count=1
@@ -13,3 +13,6 @@ all: $(bootrom_img)
 
 %.elf: %.S linker.ld
 	$(GCC) -Tlinker.ld $< -nostdlib -static -Wl,--no-gc-sections -o $@
+
+%.dump: %.elf
+	riscv64-unknown-elf-objdump --disassemble-all --disassemble-zeroes --section=.text --section=.text.start --section=.text.hang --section=.data --section=.bss --section=.rodata.dtb $< > $@

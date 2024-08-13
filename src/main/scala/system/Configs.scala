@@ -93,10 +93,10 @@ class DefaultFPGAConfig extends Config(new WithNSmallCores(1) ++ new BaseFPGACon
 
 class CloneTileConfig extends Config(new WithCloneRocketTiles(7) ++ new WithNBigCores(1) ++ new WithCoherentBusTopology ++ new BaseConfig)
 
-import MAC._
+import Switch._
 
 class UserFPGAConfig extends Config(
-  new MacConfig ++
+  new SwitchConfig ++
   new WithJtagDTM ++
   new WithNoSlavePort ++
   new With1MicroCore ++ 

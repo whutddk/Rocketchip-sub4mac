@@ -103,3 +103,13 @@ class UserFPGAConfig extends Config(
   new WithCoherentBusTopology ++
   new BaseConfig
 )
+
+import NewMac._
+class UserNewMacConfig extends Config(
+  new NewMacConfig ++
+  new WithJtagDTM ++
+  new WithNoSlavePort ++
+  new With1MicroCore ++ 
+  new WithCoherentBusTopology ++
+  new BaseConfig
+)

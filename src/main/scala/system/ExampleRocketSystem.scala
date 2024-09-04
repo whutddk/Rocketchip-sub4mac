@@ -8,6 +8,7 @@ import freechips.rocketchip.devices.tilelink._
 import freechips.rocketchip.util.DontTouch
 
 import Switch._
+import NewMac._
 
 
 /** Example Top with periphery devices and ports, and a Rocket subsystem */
@@ -16,7 +17,7 @@ class ExampleRocketSystem(implicit p: Parameters) extends RocketSubsystem
     with CanHaveMasterAXI4MemPort
     with CanHaveMasterAXI4MMIOPort
     with CanHaveSlaveAXI4Port
-    with WithSwitchMix
+    with WithNewMacMix
 {
   // optionally add ROM devices
   // Note that setting BootROMLocated will override the reset_vector for all tiles
@@ -30,5 +31,5 @@ class ExampleRocketSystemModuleImp[+L <: ExampleRocketSystem](_outer: L) extends
     with HasRTCModuleImp
     with HasExtInterruptsModuleImp
     with DontTouch
-    with WithSwitchMixModuleImp
+    with WithNewMacMixModuleImp
     

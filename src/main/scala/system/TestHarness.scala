@@ -46,5 +46,5 @@ class TestHarness()(implicit p: Parameters) extends Module {
   // ldut.module.macIO.mrxerr_pad_i := false.B
   // ldut.module.macIO.asyncReset := false.B.asAsyncReset
 
-    ldut.module.switchIO := DontCare
+    ldut.module.io := DontCare
 }

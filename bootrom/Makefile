@@ -1,6 +1,6 @@
 bootrom_img = bootrom.img
 
-GCC=riscv64-unknown-elf-gcc -march=rv64im -mabi=lp64
+GCC=riscv64-unknown-elf-gcc -march=rv32im -mabi=ilp32
 OBJCOPY=riscv64-unknown-elf-objcopy
 
 all: $(bootrom_img) bootrom.dump

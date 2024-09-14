@@ -216,7 +216,7 @@ class With1TinyCore extends Config((site, here, up) => {
 })
 
 class With1MicroCore extends Config((site, here, up) => {
-  case XLen => 64
+  case XLen => 32
   case TilesLocated(InSubsystem) => {
     val micro = RocketTileParams(
       core = RocketCoreParams(

@@ -47,4 +47,7 @@ class TestHarness()(implicit p: Parameters) extends Module {
   // ldut.module.macIO.asyncReset := false.B.asAsyncReset
 
     ldut.module.io := DontCare
+    ldut.module.inner := DontCare
+    ldut.apbCfg := DontCare
+    ldut.axiData := DontCare
 }

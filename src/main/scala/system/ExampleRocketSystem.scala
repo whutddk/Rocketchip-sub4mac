@@ -18,6 +18,7 @@ class ExampleRocketSystem(implicit p: Parameters) extends RocketSubsystem
     with CanHaveMasterAXI4MMIOPort
     with CanHaveSlaveAXI4Port
     with WithNewMacMix
+    with WithAccMacMix
 {
   // optionally add ROM devices
   // Note that setting BootROMLocated will override the reset_vector for all tiles
@@ -32,4 +33,5 @@ class ExampleRocketSystemModuleImp[+L <: ExampleRocketSystem](_outer: L) extends
     with HasExtInterruptsModuleImp
     with DontTouch
     with WithNewMacMixModuleImp
+    with WithAccMacMixModuleImp
     
